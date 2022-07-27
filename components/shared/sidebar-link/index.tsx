@@ -24,12 +24,12 @@ const StyledLink = styled.button`
 	}
 `;
 
-interface NavbarLinkProps {
+interface SidebarLinkProps {
 	onClick?: () => void;
 }
 
-const NavbarLink: React.FC<NavbarLinkProps> = ({ onClick, children }) => {
+const SidebarLink: React.FC<SidebarLinkProps> = ({ onClick, children }) => {
 	return <StyledLink onClick={onClick}>{children}</StyledLink>;
 };
 
-export default NavbarLink;
+export default SidebarLink;

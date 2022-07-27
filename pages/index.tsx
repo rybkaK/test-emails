@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import styled from 'styled-components';
-import Main from '../components/main';
-import Navbar from '../components/navbar';
+import Header from '../components/header';
+import Main from '../components/home/main';
+import Sidebar from '../components/sidebar';
 
 const HomeContainer = styled.div`
 	padding: 0;
@@ -9,8 +10,13 @@ const HomeContainer = styled.div`
 	height: 100vh;
 	width: 100%;
 
-	display: grid;
-	grid-template-columns: 250px 1fr;
+	display: flex;
+	flex-direction: column;
+`;
+
+const ListContainer = styled.div`
+	padding-left: 250px;
+	width: 100%;
 `;
 
 export default function Home() {
@@ -18,8 +24,11 @@ export default function Home() {
 		<>
 			<Head>Mails</Head>
 			<HomeContainer>
-				<Navbar />
-				<Main />
+				<Sidebar />
+				<ListContainer>
+					<Header />
+					<Main />
+				</ListContainer>
 			</HomeContainer>
 		</>
 	);

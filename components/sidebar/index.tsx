@@ -13,47 +13,59 @@ import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
 import { TbMail, TbMailOpened, TbTrashX } from 'react-icons/tb';
 
 import Button from '../shared/button';
-import NavbarLink from '../shared/navbar-link';
+import SidebarLink from '../shared/sidebar-link';
 
-const NavbarContainer = styled.div`
+const SidebarContainer = styled.div`
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+
 	height: 100%;
-	width: 100%;
+	width: 250px;
 
 	padding: 20px 0;
 	display: flex;
 	flex-direction: column;
+
+	-webkit-box-shadow: -20px 0px 11px 18px #5757574b;
+	box-shadow: -20px 0px 11px 18px #5757574b;
 `;
 
-const NavbarHeader = styled.div`
+const SidebarHeader = styled.div`
 	margin: 0 20px;
 	display: flex;
 	flex-direction: column;
 `;
 
-const Avatar = styled.div`
+const Logo = styled.div`
 	padding: 40px 20px;
 	display: flex;
-	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: #ffffff;
 
+	font-weight: 700;
 	border-radius: 100%;
-
 	background-color: red;
 	margin-bottom: 20px;
 `;
 
-const NavbarMenu = styled.div`
+const SidebarMenu = styled.nav`
+	margin-right: 20px;
+
 	display: flex;
 	flex-direction: column;
 
 	padding: 30px 0;
 `;
 
-const NavbarMore = styled.div`
+const SidebarMore = styled.div`
 	display: flex;
 	flex-direction: column;
 `;
 
-const Navbar = () => {
+const Sidebar = () => {
 	const [isMoreLinksShown, setIsMoreLinksShown] = useState(false);
 
 	const handleMoreLinkShown = useCallback(() => {
@@ -61,63 +73,63 @@ const Navbar = () => {
 	}, []);
 
 	return (
-		<NavbarContainer>
-			<NavbarHeader>
-				<Avatar />
+		<SidebarContainer>
+			<SidebarHeader>
+				<Logo>App Logo</Logo>
 				<Button>COMPOSE</Button>
-			</NavbarHeader>
-			<NavbarMenu>
-				<NavbarLink>
+			</SidebarHeader>
+			<SidebarMenu>
+				<SidebarLink>
 					<TbMail fontSize={20} />
 					Unread
-				</NavbarLink>
-				<NavbarLink>
+				</SidebarLink>
+				<SidebarLink>
 					<AiOutlineInbox fontSize={20} />
 					All
-				</NavbarLink>
-				<NavbarLink>
+				</SidebarLink>
+				<SidebarLink>
 					<TbTrashX fontSize={20} />
 					Trash
-				</NavbarLink>
-				<NavbarLink onClick={handleMoreLinkShown}>
+				</SidebarLink>
+				<SidebarLink onClick={handleMoreLinkShown}>
 					{isMoreLinksShown ? (
 						<TiArrowSortedUp fontSize={20} />
 					) : (
 						<TiArrowSortedDown fontSize={20} />
 					)}
 					More
-				</NavbarLink>
+				</SidebarLink>
 				{isMoreLinksShown && (
-					<NavbarMore>
-						<NavbarLink>
+					<SidebarMore>
+						<SidebarLink>
 							<TbMailOpened fontSize={20} />
 							Open
-						</NavbarLink>
-						<NavbarLink>
+						</SidebarLink>
+						<SidebarLink>
 							<AiOutlineLike fontSize={20} />
 							Interested
-						</NavbarLink>
-						<NavbarLink>
+						</SidebarLink>
+						<SidebarLink>
 							<AiOutlineCheckSquare fontSize={20} />
 							Negotiating
-						</NavbarLink>
-						<NavbarLink>
+						</SidebarLink>
+						<SidebarLink>
 							<AiOutlineReload fontSize={20} />
 							Converted
-						</NavbarLink>
-						<NavbarLink>
+						</SidebarLink>
+						<SidebarLink>
 							<RiUserFollowLine fontSize={20} />
 							Followup
-						</NavbarLink>
-						<NavbarLink>
+						</SidebarLink>
+						<SidebarLink>
 							<AiOutlineDislike fontSize={20} />
 							Not Interested
-						</NavbarLink>
-					</NavbarMore>
+						</SidebarLink>
+					</SidebarMore>
 				)}
-			</NavbarMenu>
-		</NavbarContainer>
+			</SidebarMenu>
+		</SidebarContainer>
 	);
 };
 
-export default Navbar;
+export default Sidebar;
