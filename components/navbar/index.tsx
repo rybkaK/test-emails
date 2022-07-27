@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 
-import { MdOutlineEmail } from 'react-icons/md';
 import {
 	AiOutlineLike,
 	AiOutlineInbox,
@@ -10,6 +9,7 @@ import {
 	AiOutlineCheckSquare,
 } from 'react-icons/ai';
 import { RiUserFollowLine } from 'react-icons/ri';
+import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
 import { TbMail, TbMailOpened, TbTrashX } from 'react-icons/tb';
 
 import Button from '../shared/button';
@@ -48,7 +48,18 @@ const NavbarMenu = styled.div`
 	padding: 30px 0;
 `;
 
+const NavbarMore = styled.div`
+	display: flex;
+	flex-direction: column;
+`;
+
 const Navbar = () => {
+	const [isMoreLinksShown, setIsMoreLinksShown] = useState(false);
+
+	const handleMoreLinkShown = useCallback(() => {
+		setIsMoreLinksShown((prev) => !prev);
+	}, []);
+
 	return (
 		<NavbarContainer>
 			<NavbarHeader>
@@ -68,30 +79,42 @@ const Navbar = () => {
 					<TbTrashX fontSize={20} />
 					Trash
 				</NavbarLink>
-				<NavbarLink>
-					<TbMailOpened fontSize={20} />
-					Open
+				<NavbarLink onClick={handleMoreLinkShown}>
+					{isMoreLinksShown ? (
+						<TiArrowSortedUp fontSize={20} />
+					) : (
+						<TiArrowSortedDown fontSize={20} />
+					)}
+					More
 				</NavbarLink>
-				<NavbarLink>
-					<AiOutlineLike fontSize={20} />
-					Interested
-				</NavbarLink>
-				<NavbarLink>
-					<AiOutlineCheckSquare fontSize={20} />
-					Negotiating
-				</NavbarLink>
-				<NavbarLink>
-					<AiOutlineReload fontSize={20} />
-					Converted
-				</NavbarLink>
-				<NavbarLink>
-					<RiUserFollowLine fontSize={20} />
-					Followup
-				</NavbarLink>
-				<NavbarLink>
-					<AiOutlineDislike fontSize={20} />
-					Not Interested
-				</NavbarLink>
+				{isMoreLinksShown && (
+					<NavbarMore>
+						<NavbarLink>
+							<TbMailOpened fontSize={20} />
+							Open
+						</NavbarLink>
+						<NavbarLink>
+							<AiOutlineLike fontSize={20} />
+							Interested
+						</NavbarLink>
+						<NavbarLink>
+							<AiOutlineCheckSquare fontSize={20} />
+							Negotiating
+						</NavbarLink>
+						<NavbarLink>
+							<AiOutlineReload fontSize={20} />
+							Converted
+						</NavbarLink>
+						<NavbarLink>
+							<RiUserFollowLine fontSize={20} />
+							Followup
+						</NavbarLink>
+						<NavbarLink>
+							<AiOutlineDislike fontSize={20} />
+							Not Interested
+						</NavbarLink>
+					</NavbarMore>
+				)}
 			</NavbarMenu>
 		</NavbarContainer>
 	);

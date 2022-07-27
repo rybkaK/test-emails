@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-	padding: 10px 15px;
+	padding: 15px;
 
 	display: flex;
 	align-items: center;
@@ -11,8 +11,8 @@ const StyledButton = styled.button`
 	border: none;
 	cursor: pointer;
 
-	border-radius: 15px;
-	font-size: 12px;
+	border-radius: 10px;
+	font-size: 14px;
 	font-weight: 400;
 	color: #ffffff;
 	background-color: #d3165e;
