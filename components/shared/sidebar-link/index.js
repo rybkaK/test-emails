@@ -24,11 +24,7 @@ const StyledLink = styled.button`
 	}
 `;
 
-interface SidebarLinkProps {
-	onClick?: () => void;
-}
-
-const SidebarLink: React.FC<SidebarLinkProps> = ({ onClick, children }) => {
+const SidebarLink = ({ onClick, children }) => {
 	return <StyledLink onClick={onClick}>{children}</StyledLink>;
 };
 

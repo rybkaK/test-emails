@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import SearchInput from '../shared/search-input';
-
 import { BiImage } from 'react-icons/bi';
+import SearchInput from '../shared/search-input';
 
 const HeaderContainer = styled.header`
 	height: 90px;
@@ -41,11 +40,7 @@ const AvatarError = styled.div`
 	margin-right: 50px;
 `;
 
-interface HeaderProps {
-	imageSrc?: string;
-}
-
-const Header: React.FC<HeaderProps> = ({ imageSrc }) => {
+const Header = ({ imageSrc }) => {
 	return (
 		<HeaderContainer>
 			<SearchInput placeholder="Search in mail" />

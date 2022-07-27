@@ -1,3 +1,4 @@
+import React from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
@@ -8,20 +9,14 @@ const GlobalStyle = createGlobalStyle`
   *:before,
   *:after {
 	margin: 0;
-    padding: 0;
+	padding: 0;
 	box-sizing: border-box;
-
+	
 	font-family: Arial, Helvetica, sans-serif;
   }
 `;
 
-interface ThemeInterface {
-	colors: {
-		primary: string;
-	};
-}
-
-const theme: ThemeInterface = {
+const theme = {
 	colors: {
 		primary: '#000000',
 	},

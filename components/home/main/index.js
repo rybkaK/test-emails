@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useCallback, useState } from 'react';
 import { AiOutlineReload } from 'react-icons/ai';
 import { TbMail, TbTrashX } from 'react-icons/tb';
@@ -6,10 +7,10 @@ import {
 	MdOutlineArrowForwardIos,
 } from 'react-icons/md';
 import styled from 'styled-components';
-
 import Checkbox from '../../shared/checkbox';
 import IconButton from '../../shared/icon-button';
 import Dropdown from '../../shared/dropdown';
+import Mail from '../mail';
 
 const MainContainer = styled.main`
 	padding: 40px 75px 40px 35px;
@@ -19,7 +20,7 @@ const MainContainer = styled.main`
 `;
 
 const MainHeader = styled.div`
-	padding: 10px;
+	padding: 10px 0 10px 20px;
 
 	display: flex;
 	align-items: center;
@@ -39,7 +40,17 @@ const PaginationInfo = styled.p`
 	color: #555555;
 `;
 
-const Main: React.FC = () => {
+const MainBody = styled.div`
+	overflow: auto;
+	max-height: calc(100vh - 250px);
+	display: flex;
+	flex-direction: column;
+
+	border-radius: 5px;
+	border: 1px solid #5757572f;
+`;
+
+const Main = () => {
 	const [isAllMailsSelected, setIsAllMailsSelected] = useState(false);
 
 	const [page, setPage] = useState(0);
@@ -84,6 +95,9 @@ const Main: React.FC = () => {
 					</IconButton>
 				</PaginationContainer>
 			</MainHeader>
+			<MainBody>
+				<Mail title="Hello" description="Hello World!" date="11-11-11" />
+			</MainBody>
 		</MainContainer>
 	);
 };

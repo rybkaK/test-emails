@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler } from 'react';
+import React from 'react';
 import { FiSearch } from 'react-icons/fi';
 import styled from 'styled-components';
 
@@ -32,17 +32,7 @@ const StyledSearchInput = styled.input`
 	outline: none;
 `;
 
-interface SearchInputProps {
-	placeholder: string;
-	value?: string;
-	onChange?: ChangeEventHandler<HTMLInputElement>;
-}
-
-const SearchInput: React.FC<SearchInputProps> = ({
-	placeholder,
-	value,
-	onChange,
-}) => {
+const SearchInput = ({ placeholder, value, onChange }) => {
 	return (
 		<SearchInputContainer>
 			<StyledSearchInput
