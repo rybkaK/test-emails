@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { memo, useCallback, useState } from 'react';
 import styled from 'styled-components';
 import {
@@ -6,6 +7,7 @@ import {
 	AiOutlineReload,
 	AiOutlineDislike,
 	AiOutlinePlus,
+	AiOutlineMenuFold,
 	AiOutlineCheckSquare,
 } from 'react-icons/ai';
 import { RiUserFollowLine } from 'react-icons/ri';
@@ -15,9 +17,16 @@ import { TbMail, TbMailOpened, TbTrashX } from 'react-icons/tb';
 import { useRouter } from 'next/router';
 import SidebarLink from '../shared/sidebarLink';
 import SidebarToggle from '../shared/sidebarToggle';
+import IconButton from '../shared/iconButton';
 
 const SidebarContainer = styled.div`
-	width: ${(props) => (props.opened ? '250px' : '80px')};
+	width: 80px;
+
+	${(props) =>
+		props.openedDesktop && {
+			width: '250px',
+		}};
+
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -36,10 +45,13 @@ const SidebarContainer = styled.div`
 	box-shadow: -20px 0px 11px 18px #5757574b;
 
 	overflow: hidden;
+	@media (max-width: 1024px) {
+		width: ${(props) => (props.openedMobile ? '250px' : '0')};
+	}
 `;
 
 const SidebarHeader = styled.div`
-	margin: 0 20px 20px;
+	margin: 0 16px 20px;
 	display: flex;
 	flex-direction: column;
 `;
@@ -57,8 +69,6 @@ const Logo = styled.div`
 	width: 40px;
 	min-width: 40px;
 	height: 40px;
-
-	margin-right: 20px;
 
 	display: flex;
 	align-items: center;
@@ -92,16 +102,38 @@ const SidebarMore = styled.div`
 `;
 
 const ToggleText = styled.div`
-	opacity: ${(props) => (props.showText ? '1' : '0')};
 	margin-left: 15px;
 	transition: opacity 0.5s ease-in-out;
+
+	opacity: ${(props) => (props.showDesktopText ? '1' : '0')};
+
+	@media (max-width: 1024px) {
+		margin-right: 0px;
+		display: block;
+		opacity: ${(props) => (props.showMobileText ? '1' : '0')};
+	}
 `;
 
-// TODO move all strings into constants
+const MenuBtn = styled.div`
+	margin-left: auto;
+	margin-right: 10px;
+	height: 34px;
+	width: 34px;
+	display: none;
+	@media (max-width: 1024px) {
+		margin-right: 0px;
+		display: block;
+	}
+`;
 
-const Sidebar = ({ isOpen, onToggle }) => {
+const Sidebar = ({
+	isOpenMobile,
+	onMobileToggle,
+	isOpenDesktop,
+	onDesktopToggle,
+}) => {
 	const [isMoreLinksShown, setIsMoreLinksShown] = useState(false);
-
+	const [isHovered, setIsHovered] = useState(false);
 	const router = useRouter();
 
 	const handleMoreLinkShown = useCallback(() => {
@@ -109,21 +141,45 @@ const Sidebar = ({ isOpen, onToggle }) => {
 	}, []);
 
 	return (
-		<SidebarContainer opened={isOpen}>
+		<SidebarContainer
+			openedMobile={isOpenMobile}
+			openedDesktop={(isHovered && !isOpenDesktop) || isOpenDesktop}
+			onMouseEnter={() => setIsHovered(true)}
+			onMouseLeave={() => setIsHovered(false)}
+		>
 			<SidebarHeader>
 				<LogoContainer>
 					<Logo>M</Logo>
-					Mailer
+					<ToggleText
+						showMobileText={isOpenMobile}
+						showDesktopText={(isHovered && !isOpenDesktop) || isOpenDesktop}
+					>
+						Mailer
+					</ToggleText>
+					<MenuBtn>
+						<IconButton onClick={onMobileToggle}>
+							<AiOutlineMenuFold fontSize={24} />
+						</IconButton>
+					</MenuBtn>
 				</LogoContainer>
-				<SidebarToggle onClick={onToggle} isOpen={isOpen}>
+				<SidebarToggle
+					onClick={onDesktopToggle}
+					isOpen={(isHovered && !isOpenDesktop) || isOpenDesktop}
+				>
 					<AiOutlinePlus fontSize={18} />
-					<ToggleText showText={isOpen}>COMPOSE</ToggleText>
+					<ToggleText
+						showMobileText={isOpenMobile}
+						showDesktopText={(isHovered && !isOpenDesktop) || isOpenDesktop}
+					>
+						COMPOSE
+					</ToggleText>
 				</SidebarToggle>
 			</SidebarHeader>
 			<SidebarMenu>
 				<SidebarLink
 					text="Unread"
-					showText={isOpen}
+					showMobileText={isOpenMobile}
+					showDesktopText={(isHovered && !isOpenDesktop) || isOpenDesktop}
 					href="unread"
 					selected={(router.route || '') === '/unread'}
 				>
@@ -131,7 +187,8 @@ const Sidebar = ({ isOpen, onToggle }) => {
 				</SidebarLink>
 				<SidebarLink
 					text="All"
-					showText={isOpen}
+					showMobileText={isOpenMobile}
+					showDesktopText={(isHovered && !isOpenDesktop) || isOpenDesktop}
 					href="/"
 					selected={(router.route || '') === '/'}
 				>
@@ -139,7 +196,8 @@ const Sidebar = ({ isOpen, onToggle }) => {
 				</SidebarLink>
 				<SidebarLink
 					text="Trash"
-					showText={isOpen}
+					showMobileText={isOpenMobile}
+					showDesktopText={(isHovered && !isOpenDesktop) || isOpenDesktop}
 					href="trash"
 					selected={(router.route || '') === '/trash'}
 				>
@@ -148,7 +206,8 @@ const Sidebar = ({ isOpen, onToggle }) => {
 				<SidebarLink
 					onClick={handleMoreLinkShown}
 					text="More"
-					showText={isOpen}
+					showMobileText={isOpenMobile}
+					showDesktopText={(isHovered && !isOpenDesktop) || isOpenDesktop}
 				>
 					{isMoreLinksShown ? (
 						<TiArrowSortedUp fontSize={20} />
@@ -160,7 +219,8 @@ const Sidebar = ({ isOpen, onToggle }) => {
 					<SidebarMore>
 						<SidebarLink
 							text="Open"
-							showText={isOpen}
+							showMobileText={isOpenMobile}
+							showDesktopText={(isHovered && !isOpenDesktop) || isOpenDesktop}
 							href="open"
 							selected={(router.route || '') === '/open'}
 						>
@@ -168,7 +228,8 @@ const Sidebar = ({ isOpen, onToggle }) => {
 						</SidebarLink>
 						<SidebarLink
 							text="Interested"
-							showText={isOpen}
+							showMobileText={isOpenMobile}
+							showDesktopText={(isHovered && !isOpenDesktop) || isOpenDesktop}
 							href="interested"
 							selected={(router.route || '') === '/interested'}
 						>
@@ -176,7 +237,8 @@ const Sidebar = ({ isOpen, onToggle }) => {
 						</SidebarLink>
 						<SidebarLink
 							text="Negotiating"
-							showText={isOpen}
+							showMobileText={isOpenMobile}
+							showDesktopText={(isHovered && !isOpenDesktop) || isOpenDesktop}
 							href="negotiating"
 							selected={(router.route || '') === '/negotiating'}
 						>
@@ -184,7 +246,8 @@ const Sidebar = ({ isOpen, onToggle }) => {
 						</SidebarLink>
 						<SidebarLink
 							text="Converted"
-							showText={isOpen}
+							showMobileText={isOpenMobile}
+							showDesktopText={(isHovered && !isOpenDesktop) || isOpenDesktop}
 							href="converted"
 							selected={(router.route || '') === '/converted'}
 						>
@@ -192,7 +255,8 @@ const Sidebar = ({ isOpen, onToggle }) => {
 						</SidebarLink>
 						<SidebarLink
 							text="Followup"
-							showText={isOpen}
+							showMobileText={isOpenMobile}
+							showDesktopText={(isHovered && !isOpenDesktop) || isOpenDesktop}
 							href="followup"
 							selected={(router.route || '') === '/followup'}
 						>
@@ -200,7 +264,8 @@ const Sidebar = ({ isOpen, onToggle }) => {
 						</SidebarLink>
 						<SidebarLink
 							text="Not Interested"
-							showText={isOpen}
+							showMobileText={isOpenMobile}
+							showDesktopText={(isHovered && !isOpenDesktop) || isOpenDesktop}
 							href="not-interested"
 							selected={(router.route || '') === '/not-interested'}
 						>

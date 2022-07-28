@@ -16,9 +16,10 @@ const LayoutContainer = styled.div`
 `;
 
 const ListContainer = styled.div`
-	padding-left: ${(props) => (props.opened ? '250px' : '80px')};
-	@media (max-width: 768px) {
-		padding-left: 80px;
+	padding-left: ${(props) => (props.desktopOpened ? '250px' : '80px')};
+
+	@media (max-width: 1024px) {
+		padding-left: 0;
 	}
 	width: 100%;
 	transition: padding 0.5s ease-in-out;
@@ -27,12 +28,17 @@ const ListContainer = styled.div`
 const Layout = ({ children }) => {
 	const dispatch = useDispatch();
 
-	const [isOpenedSidebar, setIsOpenedSidebar] = useState(true);
+	const [isOpenedMobileSidebar, setIsOpenedMobileSidebar] = useState(false);
+	const [isOpenedDesktopSidebar, setIsOpenedDesktopSidebar] = useState(false);
 
 	const searchValue = useSelector(getSearchValue);
 
-	const toggleSidebar = useCallback(() => {
-		setIsOpenedSidebar((prev) => !prev);
+	const toggleMobileSidebar = useCallback(() => {
+		setIsOpenedMobileSidebar((prev) => !prev);
+	}, []);
+
+	const toggleDesktopSidebar = useCallback(() => {
+		setIsOpenedDesktopSidebar((prev) => !prev);
 	}, []);
 
 	const handleInputChange = useCallback(
@@ -44,9 +50,18 @@ const Layout = ({ children }) => {
 
 	return (
 		<LayoutContainer>
-			<Sidebar isOpen={isOpenedSidebar} onToggle={toggleSidebar} />
-			<ListContainer opened={isOpenedSidebar}>
-				<Header inputValue={searchValue} onInputChange={handleInputChange} />
+			<Sidebar
+				isOpenMobile={isOpenedMobileSidebar}
+				onMobileToggle={toggleMobileSidebar}
+				isOpenDesktop={isOpenedDesktopSidebar}
+				onDesktopToggle={toggleDesktopSidebar}
+			/>
+			<ListContainer desktopOpened={isOpenedDesktopSidebar}>
+				<Header
+					inputValue={searchValue}
+					onInputChange={handleInputChange}
+					toggleMobileSidebar={toggleMobileSidebar}
+				/>
 				{children}
 			</ListContainer>
 		</LayoutContainer>

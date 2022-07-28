@@ -20,8 +20,8 @@ const MainContainer = styled.main`
 	display: flex;
 	flex-direction: column;
 
-	@media (max-width: 768px) {
-		padding: 40px 20px 40px 20px;
+	@media (max-width: 1024px) {
+		padding: 40px 25px 40px 25px;
 	}
 `;
 

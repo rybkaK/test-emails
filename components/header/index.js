@@ -1,7 +1,9 @@
 import { memo } from 'react';
 import styled from 'styled-components';
+import { AiOutlineMenuFold } from 'react-icons/ai';
 import { BiImage } from 'react-icons/bi';
 import SearchInput from '../shared/searchInput';
+import IconButton from '../shared/iconButton';
 
 const HeaderContainer = styled.header`
 	height: 90px;
@@ -13,9 +15,19 @@ const HeaderContainer = styled.header`
 
 	grid-template-columns: 1.5fr 1fr;
 
-	@media (max-width: 768px) {
-		padding: 10px 20px;
-		grid-template-columns: 3fr 1fr;
+	@media (max-width: 1024px) {
+		padding: 10px 25px;
+		grid-template-columns: 50px 3fr 1fr;
+	}
+`;
+
+const MenuBtn = styled.div`
+	height: 34px;
+	width: 34px;
+	display: none;
+	@media (max-width: 1024px) {
+		margin-right: 0px;
+		display: block;
 	}
 `;
 
@@ -29,7 +41,7 @@ const Avatar = styled.img`
 	margin-left: auto;
 	margin-right: 50px;
 
-	@media (max-width: 768px) {
+	@media (max-width: 1024px) {
 		margin-right: 0px;
 	}
 `;
@@ -47,14 +59,24 @@ const AvatarError = styled.div`
 
 	margin-left: auto;
 	margin-right: 50px;
-	@media (max-width: 768px) {
+	@media (max-width: 1024px) {
 		margin-right: 0px;
 	}
 `;
 
-const Header = ({ imageSrc, inputValue, onInputChange }) => {
+const Header = ({
+	imageSrc,
+	inputValue,
+	onInputChange,
+	toggleMobileSidebar,
+}) => {
 	return (
 		<HeaderContainer>
+			<MenuBtn>
+				<IconButton onClick={toggleMobileSidebar}>
+					<AiOutlineMenuFold fontSize={24} />
+				</IconButton>
+			</MenuBtn>
 			<SearchInput
 				placeholder="Search in mail"
 				value={inputValue}

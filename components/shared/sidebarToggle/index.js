@@ -33,11 +33,15 @@ const StyledSidebarToggle = styled.button`
 		transition: margin-left 0.5s ease-in-out, transform 0.5s ease-in-out;
 		min-width: 18px;
 	}
+
+	@media (max-width: 1024px) {
+		display: none;
+	}
 `;
 
-const SidebarToggle = ({ children, onClick, disabled, isOpen }) => {
+const SidebarToggle = ({ children, onClick, isOpen }) => {
 	return (
-		<StyledSidebarToggle onClick={onClick} disabled={disabled} isOpen={isOpen}>
+		<StyledSidebarToggle onClick={onClick} isOpen={isOpen}>
 			{children}
 		</StyledSidebarToggle>
 	);
