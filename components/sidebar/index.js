@@ -5,7 +5,7 @@ import {
 	AiOutlineInbox,
 	AiOutlineReload,
 	AiOutlineDislike,
-	AiOutlineMenuUnfold,
+	AiOutlinePlus,
 	AiOutlineCheckSquare,
 } from 'react-icons/ai';
 import { RiUserFollowLine } from 'react-icons/ri';
@@ -13,8 +13,8 @@ import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
 import { TbMail, TbMailOpened, TbTrashX } from 'react-icons/tb';
 
 import { useRouter } from 'next/router';
-import Button from '../shared/button';
 import SidebarLink from '../shared/sidebarLink';
+import SidebarToggle from '../shared/sidebarToggle';
 
 const SidebarContainer = styled.div`
 	width: ${(props) => (props.opened ? '250px' : '80px')};
@@ -91,6 +91,12 @@ const SidebarMore = styled.div`
 	flex-direction: column;
 `;
 
+const ToggleText = styled.div`
+	opacity: ${(props) => (props.showText ? '1' : '0')};
+	margin-left: 15px;
+	transition: opacity 0.5s ease-in-out;
+`;
+
 // TODO move all strings into constants
 
 const Sidebar = ({ isOpen, onToggle }) => {
@@ -109,9 +115,10 @@ const Sidebar = ({ isOpen, onToggle }) => {
 					<Logo>M</Logo>
 					Mailer
 				</LogoContainer>
-				<Button onClick={onToggle}>
-					<AiOutlineMenuUnfold fontSize={30} />
-				</Button>
+				<SidebarToggle onClick={onToggle} isOpen={isOpen}>
+					<AiOutlinePlus fontSize={18} />
+					<ToggleText showText={isOpen}>COMPOSE</ToggleText>
+				</SidebarToggle>
 			</SidebarHeader>
 			<SidebarMenu>
 				<SidebarLink
