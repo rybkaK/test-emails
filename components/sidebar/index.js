@@ -1,11 +1,11 @@
-import React, { useCallback, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import styled from 'styled-components';
-
 import {
 	AiOutlineLike,
 	AiOutlineInbox,
 	AiOutlineReload,
 	AiOutlineDislike,
+	AiOutlineMenuUnfold,
 	AiOutlineCheckSquare,
 } from 'react-icons/ai';
 import { RiUserFollowLine } from 'react-icons/ri';
@@ -16,20 +16,22 @@ import Button from '../shared/button';
 import SidebarLink from '../shared/sidebar-link';
 
 const SidebarContainer = styled.div`
+	width: ${(props) => (props.opened ? '250px' : '80px')};
 	position: absolute;
 	top: 0;
 	left: 0;
 	bottom: 0;
 
 	height: 100%;
-	width: 250px;
-
+	transition: width 0.5s ease-in-out;
 	padding: 20px 0;
 	display: flex;
 	flex-direction: column;
 
 	-webkit-box-shadow: -20px 0px 11px 18px #5757574b;
 	box-shadow: -20px 0px 11px 18px #5757574b;
+
+	overflow: hidden;
 `;
 
 const SidebarHeader = styled.div`
@@ -38,8 +40,22 @@ const SidebarHeader = styled.div`
 	flex-direction: column;
 `;
 
+const LogoContainer = styled.div`
+	display: flex;
+	align-items: center;
+
+	margin-bottom: 18px;
+	font-weight: 700;
+	font-size: 20px;
+`;
+
 const Logo = styled.div`
-	padding: 40px 20px;
+	width: 40px;
+	min-width: 40px;
+	height: 40px;
+
+	margin-right: 20px;
+
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -47,8 +63,13 @@ const Logo = styled.div`
 
 	font-weight: 700;
 	border-radius: 100%;
-	background-color: red;
-	margin-bottom: 20px;
+	background: rgb(255, 0, 97);
+	background: radial-gradient(
+		circle,
+		rgba(255, 0, 97, 1) 0%,
+		rgba(211, 22, 94, 1) 46%,
+		rgba(255, 0, 97, 1) 100%
+	);
 `;
 
 const SidebarMenu = styled.nav`
@@ -65,7 +86,7 @@ const SidebarMore = styled.div`
 	flex-direction: column;
 `;
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, onToggle }) => {
 	const [isMoreLinksShown, setIsMoreLinksShown] = useState(false);
 
 	const handleMoreLinkShown = useCallback(() => {
@@ -73,57 +94,64 @@ const Sidebar = () => {
 	}, []);
 
 	return (
-		<SidebarContainer>
+		<SidebarContainer opened={isOpen}>
 			<SidebarHeader>
-				<Logo>App Logo</Logo>
-				<Button>COMPOSE</Button>
+				<LogoContainer>
+					<Logo>M</Logo>
+					Mailer
+				</LogoContainer>
+				<Button onClick={onToggle}>
+					<AiOutlineMenuUnfold fontSize={30} />
+				</Button>
 			</SidebarHeader>
 			<SidebarMenu>
-				<SidebarLink>
+				<SidebarLink text="Unread" showText={isOpen} href="unread">
 					<TbMail fontSize={20} />
-					Unread
 				</SidebarLink>
-				<SidebarLink>
+				<SidebarLink text="All" showText={isOpen} href="/">
 					<AiOutlineInbox fontSize={20} />
-					All
 				</SidebarLink>
-				<SidebarLink>
+				<SidebarLink text="Trash" showText={isOpen} href="trash">
 					<TbTrashX fontSize={20} />
-					Trash
 				</SidebarLink>
-				<SidebarLink onClick={handleMoreLinkShown}>
+				<SidebarLink
+					onClick={handleMoreLinkShown}
+					text="More"
+					showText={isOpen}
+				>
 					{isMoreLinksShown ? (
 						<TiArrowSortedUp fontSize={20} />
 					) : (
 						<TiArrowSortedDown fontSize={20} />
 					)}
-					More
 				</SidebarLink>
 				{isMoreLinksShown && (
 					<SidebarMore>
-						<SidebarLink>
+						<SidebarLink text="Open" showText={isOpen} href="open">
 							<TbMailOpened fontSize={20} />
-							Open
 						</SidebarLink>
-						<SidebarLink>
+						<SidebarLink text="Interested" showText={isOpen} href="interested">
 							<AiOutlineLike fontSize={20} />
-							Interested
 						</SidebarLink>
-						<SidebarLink>
+						<SidebarLink
+							text="Negotiating"
+							showText={isOpen}
+							href="negotiating"
+						>
 							<AiOutlineCheckSquare fontSize={20} />
-							Negotiating
 						</SidebarLink>
-						<SidebarLink>
+						<SidebarLink text="Converted" showText={isOpen} href="converted">
 							<AiOutlineReload fontSize={20} />
-							Converted
 						</SidebarLink>
-						<SidebarLink>
+						<SidebarLink text="Followup" showText={isOpen} href="followup">
 							<RiUserFollowLine fontSize={20} />
-							Followup
 						</SidebarLink>
-						<SidebarLink>
+						<SidebarLink
+							text="Not Interested"
+							showText={isOpen}
+							href="not-interested"
+						>
 							<AiOutlineDislike fontSize={20} />
-							Not Interested
 						</SidebarLink>
 					</SidebarMore>
 				)}
@@ -132,4 +160,4 @@ const Sidebar = () => {
 	);
 };
 
-export default Sidebar;
+export default memo(Sidebar);

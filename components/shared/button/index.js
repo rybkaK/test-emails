@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-	padding: 15px;
+	padding: 10px 5px;
 
 	display: flex;
 	align-items: center;
@@ -15,11 +15,16 @@ const StyledButton = styled.button`
 	font-size: 14px;
 	font-weight: 400;
 	color: #ffffff;
-	background-color: #d3165e;
+	background: rgb(255, 0, 97);
+	background: linear-gradient(
+		90deg,
+		rgba(255, 0, 97, 1) 0%,
+		rgba(211, 22, 94, 1) 50%
+	);
 `;
 
-const Button = ({ children }) => {
-	return <StyledButton>{children}</StyledButton>;
+const Button = ({ children, onClick }) => {
+	return <StyledButton onClick={onClick}>{children}</StyledButton>;
 };
 
 export default Button;

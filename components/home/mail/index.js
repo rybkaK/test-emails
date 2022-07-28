@@ -37,12 +37,12 @@ const MailTitle = styled.div`
 `;
 
 const MailDescription = styled.div`
-	font-size: 12px;
+	font-size: 14px;
 `;
 
 const MailDate = styled.div`
 	margin-left: auto;
-	font-size: 12px;
+	font-size: 14px;
 `;
 
 const MailHover = styled.div`
@@ -59,7 +59,7 @@ const MailHoverContainer = styled.div`
 const Mail = ({ title, description, date }) => {
 	return (
 		<MailContainer>
-			<Checkbox checked onToggle={() => {}} />
+			<Checkbox checked={false} onToggle={() => {}} />
 			<MailTitle>{title}</MailTitle>
 			<MailDescription>{description}</MailDescription>
 			<MailDate>{date}</MailDate>

@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React, { useCallback, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { AiOutlineReload } from 'react-icons/ai';
 import { TbMail, TbTrashX } from 'react-icons/tb';
 import {
@@ -11,6 +10,7 @@ import Checkbox from '../../shared/checkbox';
 import IconButton from '../../shared/icon-button';
 import Dropdown from '../../shared/dropdown';
 import Mail from '../mail';
+import { formatDate } from '../../../utils/formatDate';
 
 const MainContainer = styled.main`
 	padding: 40px 75px 40px 35px;
@@ -50,9 +50,10 @@ const MainBody = styled.div`
 	border: 1px solid #5757572f;
 `;
 
-const Main = () => {
+const Main = ({ mails }) => {
 	const [isAllMailsSelected, setIsAllMailsSelected] = useState(false);
 
+	// eslint-disable-next-line no-unused-vars
 	const [page, setPage] = useState(0);
 
 	const toggleAllMailsCheckbox = useCallback(() => {
@@ -96,10 +97,17 @@ const Main = () => {
 				</PaginationContainer>
 			</MainHeader>
 			<MainBody>
-				<Mail title="Hello" description="Hello World!" date="11-11-11" />
+				{mails.map(({ id, name, description, date }) => (
+					<Mail
+						key={id}
+						title={name}
+						description={description}
+						date={formatDate(date)}
+					/>
+				))}
 			</MainBody>
 		</MainContainer>
 	);
 };
 
-export default Main;
+export default memo(Main);

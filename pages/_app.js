@@ -1,5 +1,8 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import Layout from '../components/layout';
+import { store } from '../redux/store';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -27,7 +30,11 @@ export default function App({ Component, pageProps }) {
 		<>
 			<GlobalStyle />
 			<ThemeProvider theme={theme}>
-				<Component {...pageProps} />
+				<Provider store={store}>
+					<Layout>
+						<Component {...pageProps} />
+					</Layout>
+				</Provider>
 			</ThemeProvider>
 		</>
 	);

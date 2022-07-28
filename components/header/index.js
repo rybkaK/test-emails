@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import styled from 'styled-components';
 import { BiImage } from 'react-icons/bi';
 import SearchInput from '../shared/search-input';
@@ -55,4 +55,4 @@ const Header = ({ imageSrc }) => {
 	);
 };
 
-export default Header;
+export default memo(Header);

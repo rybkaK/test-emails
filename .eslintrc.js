@@ -39,6 +39,10 @@ module.exports = {
 		'react/react-in-jsx-scope': 'off',
 		'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
 		'import/prefer-default-export': 'off',
+		'no-param-reassign': [
+			'error',
+			{ props: true, ignorePropertyModificationsFor: ['state'] },
+		],
 		'eslint/naming-convention': [
 			'off',
 			{
