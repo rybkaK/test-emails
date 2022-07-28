@@ -3,7 +3,7 @@ import { AiOutlineReload } from 'react-icons/ai';
 import { TbMail, TbTrashX } from 'react-icons/tb';
 import styled from 'styled-components';
 import Checkbox from '../../shared/checkbox';
-import IconButton from '../../shared/icon-button';
+import IconButton from '../../shared/iconButton';
 
 const MailContainer = styled.div`
 	position: relative;

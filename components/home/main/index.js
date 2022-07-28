@@ -8,7 +8,7 @@ import {
 } from 'react-icons/md';
 import styled from 'styled-components';
 import Checkbox from '../../shared/checkbox';
-import IconButton from '../../shared/icon-button';
+import IconButton from '../../shared/iconButton';
 import Dropdown from '../../shared/dropdown';
 import Mail from '../mail';
 import { formatDate } from '../../../utils/formatDate';
