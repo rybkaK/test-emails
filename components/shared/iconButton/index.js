@@ -17,14 +17,28 @@ const StyledIconButton = styled.button`
 	font-weight: 400;
 
 	color: #555555;
-	background-color: #ffffff;
+	background-color: transparent;
+
+	${(props) =>
+		props.type === 'cube' && {
+			borderRadius: '3px',
+			color: 'rgba(255, 0, 97, 0.8)',
+			background: '#ffffff',
+		}};
+
 	:hover {
 		background-color: #79797922;
 	}
 `;
 
-const IconButton = ({ children, onClick }) => {
-	return <StyledIconButton onClick={onClick}>{children}</StyledIconButton>;
+// TODO add disabled styles
+
+const IconButton = ({ children, onClick, type, disabled }) => {
+	return (
+		<StyledIconButton onClick={onClick} type={type} disabled={disabled}>
+			{children}
+		</StyledIconButton>
+	);
 };
 
 export default IconButton;

@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import styled from 'styled-components';
 import { BiImage } from 'react-icons/bi';
-import SearchInput from '../shared/search-input';
+import SearchInput from '../shared/searchInput';
 
 const HeaderContainer = styled.header`
 	height: 90px;

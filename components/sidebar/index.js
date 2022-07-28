@@ -14,7 +14,7 @@ import { TbMail, TbMailOpened, TbTrashX } from 'react-icons/tb';
 
 import { useRouter } from 'next/router';
 import Button from '../shared/button';
-import SidebarLink from '../shared/sidebar-link';
+import SidebarLink from '../shared/sidebarLink';
 
 const SidebarContainer = styled.div`
 	width: ${(props) => (props.opened ? '250px' : '80px')};

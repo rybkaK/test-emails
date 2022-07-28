@@ -1,6 +1,6 @@
 import React from 'react';
 import { AiOutlineReload } from 'react-icons/ai';
-import { TbMail, TbTrashX } from 'react-icons/tb';
+import { TbMailOpened, TbTrashX } from 'react-icons/tb';
 import styled from 'styled-components';
 import Checkbox from '../../shared/checkbox';
 import IconButton from '../../shared/iconButton';
@@ -47,7 +47,7 @@ const MailDate = styled.div`
 
 const MailHover = styled.div`
 	position: absolute;
-	right: 150px;
+	right: 130px;
 
 	width: 100px;
 `;
@@ -68,10 +68,10 @@ const Mail = ({ title, description, date, onToggle, checked }) => {
 					<IconButton>
 						<TbTrashX fontSize={20} />
 					</IconButton>
-					<IconButton>
-						<TbMail fontSize={20} />
+					<IconButton type="cube">
+						<TbMailOpened fontSize={20} />
 					</IconButton>
-					<IconButton>
+					<IconButton type="cube">
 						<AiOutlineReload fontSize={20} />
 					</IconButton>
 				</MailHoverContainer>
