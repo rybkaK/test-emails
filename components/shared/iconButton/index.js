@@ -23,8 +23,8 @@ const StyledIconButton = styled.button`
 	}
 `;
 
-const IconButton = ({ children }) => {
-	return <StyledIconButton>{children}</StyledIconButton>;
+const IconButton = ({ children, onClick }) => {
+	return <StyledIconButton onClick={onClick}>{children}</StyledIconButton>;
 };
 
 export default IconButton;

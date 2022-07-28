@@ -52,19 +52,36 @@ const MainBody = styled.div`
 	border: 1px solid #5757572f;
 `;
 
+const MAX_ITEMS_ON_PAGE = 10;
+
 const Main = ({ mails }) => {
 	const searchValue = useSelector(getSearchValue);
 
 	const [selectedMailsIds, setSelectedMailsIds] = useState([]);
-	// eslint-disable-next-line no-unused-vars
+
 	const [page, setPage] = useState(0);
 
-	const finalMails = useMemo(
+	const filteredMails = useMemo(
 		() =>
 			mails.filter((mail) =>
 				(mail.name || '').toLowerCase().includes(searchValue.toLowerCase()),
 			),
 		[mails, searchValue],
+	);
+
+	const finalMails = useMemo(
+		() =>
+			filteredMails.filter(
+				(_, index) =>
+					index >= page * MAX_ITEMS_ON_PAGE &&
+					index < (page + 1) * MAX_ITEMS_ON_PAGE,
+			),
+		[filteredMails, page],
+	);
+
+	const maxPage = useMemo(
+		() => Math.ceil((filteredMails.length || 1) / MAX_ITEMS_ON_PAGE),
+		[filteredMails.length],
 	);
 
 	const isSelectedAllMailsCheckbox = useMemo(
@@ -88,11 +105,19 @@ const Main = ({ mails }) => {
 		});
 	}, []);
 
+	const handlePrevPage = useCallback(() => {
+		if (page > 0) setPage((prev) => prev - 1);
+	}, [page]);
+
+	const handleNextPage = useCallback(() => {
+		if (page < maxPage - 1) setPage((prev) => prev + 1);
+	}, [maxPage, page]);
+
 	return (
 		<MainContainer>
 			<MainHeader>
 				<Checkbox
-					checked={isSelectedAllMailsCheckbox}
+					checked={!!(isSelectedAllMailsCheckbox && finalMails.length)}
 					onToggle={toggleAllMailsCheckbox}
 				/>
 				<Dropdown
@@ -115,11 +140,13 @@ const Main = ({ mails }) => {
 					<AiOutlineReload fontSize={20} />
 				</IconButton>
 				<PaginationContainer>
-					<PaginationInfo>{page} of 30</PaginationInfo>
-					<IconButton>
+					<PaginationInfo>
+						{page + 1} of {maxPage}
+					</PaginationInfo>
+					<IconButton onClick={handlePrevPage}>
 						<MdOutlineArrowBackIos fontSize={16} />
 					</IconButton>
-					<IconButton>
+					<IconButton onClick={handleNextPage}>
 						<MdOutlineArrowForwardIos fontSize={16} />
 					</IconButton>
 				</PaginationContainer>
