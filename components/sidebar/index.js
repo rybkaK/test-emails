@@ -12,6 +12,7 @@ import { RiUserFollowLine } from 'react-icons/ri';
 import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
 import { TbMail, TbMailOpened, TbTrashX } from 'react-icons/tb';
 
+import { useRouter } from 'next/router';
 import Button from '../shared/button';
 import SidebarLink from '../shared/sidebar-link';
 
@@ -86,8 +87,12 @@ const SidebarMore = styled.div`
 	flex-direction: column;
 `;
 
+// TODO move all strings into constants
+
 const Sidebar = ({ isOpen, onToggle }) => {
 	const [isMoreLinksShown, setIsMoreLinksShown] = useState(false);
+
+	const router = useRouter();
 
 	const handleMoreLinkShown = useCallback(() => {
 		setIsMoreLinksShown((prev) => !prev);
@@ -105,13 +110,28 @@ const Sidebar = ({ isOpen, onToggle }) => {
 				</Button>
 			</SidebarHeader>
 			<SidebarMenu>
-				<SidebarLink text="Unread" showText={isOpen} href="unread">
+				<SidebarLink
+					text="Unread"
+					showText={isOpen}
+					href="unread"
+					selected={(router.route || '').includes('unread')}
+				>
 					<TbMail fontSize={20} />
 				</SidebarLink>
-				<SidebarLink text="All" showText={isOpen} href="/">
+				<SidebarLink
+					text="All"
+					showText={isOpen}
+					href="/"
+					selected={(router.route || '') === '/'}
+				>
 					<AiOutlineInbox fontSize={20} />
 				</SidebarLink>
-				<SidebarLink text="Trash" showText={isOpen} href="trash">
+				<SidebarLink
+					text="Trash"
+					showText={isOpen}
+					href="trash"
+					selected={(router.route || '').includes('trash')}
+				>
 					<TbTrashX fontSize={20} />
 				</SidebarLink>
 				<SidebarLink
@@ -127,29 +147,51 @@ const Sidebar = ({ isOpen, onToggle }) => {
 				</SidebarLink>
 				{isMoreLinksShown && (
 					<SidebarMore>
-						<SidebarLink text="Open" showText={isOpen} href="open">
+						<SidebarLink
+							text="Open"
+							showText={isOpen}
+							href="open"
+							selected={(router.route || '').includes('open')}
+						>
 							<TbMailOpened fontSize={20} />
 						</SidebarLink>
-						<SidebarLink text="Interested" showText={isOpen} href="interested">
+						<SidebarLink
+							text="Interested"
+							showText={isOpen}
+							href="interested"
+							selected={(router.route || '').includes('interested')}
+						>
 							<AiOutlineLike fontSize={20} />
 						</SidebarLink>
 						<SidebarLink
 							text="Negotiating"
 							showText={isOpen}
 							href="negotiating"
+							selected={(router.route || '').includes('negotiating')}
 						>
 							<AiOutlineCheckSquare fontSize={20} />
 						</SidebarLink>
-						<SidebarLink text="Converted" showText={isOpen} href="converted">
+						<SidebarLink
+							text="Converted"
+							showText={isOpen}
+							href="converted"
+							selected={(router.route || '').includes('converted')}
+						>
 							<AiOutlineReload fontSize={20} />
 						</SidebarLink>
-						<SidebarLink text="Followup" showText={isOpen} href="followup">
+						<SidebarLink
+							text="Followup"
+							showText={isOpen}
+							href="followup"
+							selected={(router.route || '').includes('followup')}
+						>
 							<RiUserFollowLine fontSize={20} />
 						</SidebarLink>
 						<SidebarLink
 							text="Not Interested"
 							showText={isOpen}
 							href="not-interested"
+							selected={(router.route || '').includes('not-interested')}
 						>
 							<AiOutlineDislike fontSize={20} />
 						</SidebarLink>
