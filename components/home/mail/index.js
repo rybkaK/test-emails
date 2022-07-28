@@ -19,7 +19,7 @@ const MailContainer = styled.div`
 	cursor: pointer;
 
 	:hover {
-		background-color: #ffeea081;
+		background-color: #ffeea0;
 
 		div > div {
 			display: flex;
@@ -34,22 +34,36 @@ const MailTitle = styled.div`
 	font-size: 16px;
 
 	padding: 0 15px;
+	min-width: 120px;
 `;
 
 const MailDescription = styled.div`
 	font-size: 14px;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
 `;
 
 const MailDate = styled.div`
 	margin-left: auto;
 	font-size: 14px;
+
+	min-width: 75px;
+	text-align: end;
 `;
 
 const MailHover = styled.div`
 	position: absolute;
 	right: 130px;
 
-	width: 100px;
+	width: 120px;
+	padding-right: 20px;
+	background-color: #ffeea0;
+
+	@media (max-width: 768px) {
+		right: 0;
+	}
 `;
 
 const MailHoverContainer = styled.div`

@@ -19,6 +19,10 @@ const MainContainer = styled.main`
 
 	display: flex;
 	flex-direction: column;
+
+	@media (max-width: 768px) {
+		padding: 40px 20px 40px 20px;
+	}
 `;
 
 const MainHeader = styled.div`
@@ -26,6 +30,8 @@ const MainHeader = styled.div`
 
 	display: flex;
 	align-items: center;
+
+	flex-wrap: wrap;
 `;
 
 const PaginationContainer = styled.div`
@@ -33,6 +39,8 @@ const PaginationContainer = styled.div`
 
 	display: flex;
 	align-items: center;
+
+	min-width: 105px;
 `;
 
 const PaginationInfo = styled.p`

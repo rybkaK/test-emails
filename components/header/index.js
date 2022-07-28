@@ -12,6 +12,11 @@ const HeaderContainer = styled.header`
 	align-items: center;
 
 	grid-template-columns: 1.5fr 1fr;
+
+	@media (max-width: 768px) {
+		padding: 10px 20px;
+		grid-template-columns: 3fr 1fr;
+	}
 `;
 
 const Avatar = styled.img`
@@ -23,6 +28,10 @@ const Avatar = styled.img`
 
 	margin-left: auto;
 	margin-right: 50px;
+
+	@media (max-width: 768px) {
+		margin-right: 0px;
+	}
 `;
 
 const AvatarError = styled.div`
@@ -38,6 +47,9 @@ const AvatarError = styled.div`
 
 	margin-left: auto;
 	margin-right: 50px;
+	@media (max-width: 768px) {
+		margin-right: 0px;
+	}
 `;
 
 const Header = ({ imageSrc, inputValue, onInputChange }) => {

@@ -5,6 +5,9 @@ import styled from 'styled-components';
 const StyledLink = styled.button`
 	padding: ${(props) =>
 		props.showText ? '20px 15px 20px 70px;' : '20px 15px 20px 30px;'};
+
+	margin-right: 20px;
+
 	background-color: ${(props) => (props.selected ? '#79797922' : '#ffffff')};
 	display: grid;
 	align-items: center;

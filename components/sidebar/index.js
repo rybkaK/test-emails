@@ -29,6 +29,9 @@ const SidebarContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 
+	background-color: #ffffff;
+	z-index: 1000;
+
 	-webkit-box-shadow: -20px 0px 11px 18px #5757574b;
 	box-shadow: -20px 0px 11px 18px #5757574b;
 
@@ -36,7 +39,7 @@ const SidebarContainer = styled.div`
 `;
 
 const SidebarHeader = styled.div`
-	margin: 0 20px;
+	margin: 0 20px 20px;
 	display: flex;
 	flex-direction: column;
 `;
@@ -74,12 +77,13 @@ const Logo = styled.div`
 `;
 
 const SidebarMenu = styled.nav`
-	margin-right: 20px;
-
 	display: flex;
 	flex-direction: column;
 
-	padding: 30px 0;
+	padding: 10px 0 30px;
+
+	overflow-y: auto;
+	overflow-x: hidden;
 `;
 
 const SidebarMore = styled.div`

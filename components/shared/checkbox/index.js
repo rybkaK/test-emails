@@ -6,6 +6,8 @@ const CheckboxContainer = styled.div`
 	width: 18px;
 	height: 18px;
 
+	min-width: 18px;
+
 	margin: 0 5px;
 
 	display: flex;

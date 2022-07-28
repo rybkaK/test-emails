@@ -17,6 +17,9 @@ const LayoutContainer = styled.div`
 
 const ListContainer = styled.div`
 	padding-left: ${(props) => (props.opened ? '250px' : '80px')};
+	@media (max-width: 768px) {
+		padding-left: 80px;
+	}
 	width: 100%;
 	transition: padding 0.5s ease-in-out;
 `;
