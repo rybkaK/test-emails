@@ -55,14 +55,9 @@ const MainBody = styled.div`
 const Main = ({ mails }) => {
 	const searchValue = useSelector(getSearchValue);
 
-	const [isAllMailsSelected, setIsAllMailsSelected] = useState(false);
-
+	const [selectedMailsIds, setSelectedMailsIds] = useState([]);
 	// eslint-disable-next-line no-unused-vars
 	const [page, setPage] = useState(0);
-
-	const toggleAllMailsCheckbox = useCallback(() => {
-		setIsAllMailsSelected((prev) => !prev);
-	}, []);
 
 	const finalMails = useMemo(
 		() =>
@@ -72,11 +67,32 @@ const Main = ({ mails }) => {
 		[mails, searchValue],
 	);
 
+	const isSelectedAllMailsCheckbox = useMemo(
+		() => selectedMailsIds.length === finalMails.length,
+		[finalMails.length, selectedMailsIds.length],
+	);
+
+	const toggleAllMailsCheckbox = useCallback(() => {
+		setSelectedMailsIds(() => {
+			if (!isSelectedAllMailsCheckbox) {
+				return [...finalMails.map((mail) => mail.id)];
+			}
+			return [];
+		});
+	}, [finalMails, isSelectedAllMailsCheckbox]);
+
+	const toggleMailsCheckbox = useCallback((mailId) => {
+		setSelectedMailsIds((prev) => {
+			if (prev.includes(mailId)) return prev.filter((id) => id !== mailId);
+			return [...prev, mailId];
+		});
+	}, []);
+
 	return (
 		<MainContainer>
 			<MainHeader>
 				<Checkbox
-					checked={isAllMailsSelected}
+					checked={isSelectedAllMailsCheckbox}
 					onToggle={toggleAllMailsCheckbox}
 				/>
 				<Dropdown
@@ -115,6 +131,8 @@ const Main = ({ mails }) => {
 						title={name}
 						description={description}
 						date={formatDate(date)}
+						onToggle={() => toggleMailsCheckbox(id)}
+						checked={selectedMailsIds.includes(id)}
 					/>
 				))}
 			</MainBody>

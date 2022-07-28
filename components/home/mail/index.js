@@ -56,10 +56,10 @@ const MailHoverContainer = styled.div`
 	display: none;
 `;
 
-const Mail = ({ title, description, date }) => {
+const Mail = ({ title, description, date, onToggle, checked }) => {
 	return (
 		<MailContainer>
-			<Checkbox checked={false} onToggle={() => {}} />
+			<Checkbox checked={checked} onToggle={onToggle} />
 			<MailTitle>{title}</MailTitle>
 			<MailDescription>{description}</MailDescription>
 			<MailDate>{date}</MailDate>

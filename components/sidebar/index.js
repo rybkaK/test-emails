@@ -114,7 +114,7 @@ const Sidebar = ({ isOpen, onToggle }) => {
 					text="Unread"
 					showText={isOpen}
 					href="unread"
-					selected={(router.route || '').includes('unread')}
+					selected={(router.route || '') === '/unread'}
 				>
 					<TbMail fontSize={20} />
 				</SidebarLink>
@@ -130,7 +130,7 @@ const Sidebar = ({ isOpen, onToggle }) => {
 					text="Trash"
 					showText={isOpen}
 					href="trash"
-					selected={(router.route || '').includes('trash')}
+					selected={(router.route || '') === '/trash'}
 				>
 					<TbTrashX fontSize={20} />
 				</SidebarLink>
@@ -151,7 +151,7 @@ const Sidebar = ({ isOpen, onToggle }) => {
 							text="Open"
 							showText={isOpen}
 							href="open"
-							selected={(router.route || '').includes('open')}
+							selected={(router.route || '') === '/open'}
 						>
 							<TbMailOpened fontSize={20} />
 						</SidebarLink>
@@ -159,7 +159,7 @@ const Sidebar = ({ isOpen, onToggle }) => {
 							text="Interested"
 							showText={isOpen}
 							href="interested"
-							selected={(router.route || '').includes('interested')}
+							selected={(router.route || '') === '/interested'}
 						>
 							<AiOutlineLike fontSize={20} />
 						</SidebarLink>
@@ -167,7 +167,7 @@ const Sidebar = ({ isOpen, onToggle }) => {
 							text="Negotiating"
 							showText={isOpen}
 							href="negotiating"
-							selected={(router.route || '').includes('negotiating')}
+							selected={(router.route || '') === '/negotiating'}
 						>
 							<AiOutlineCheckSquare fontSize={20} />
 						</SidebarLink>
@@ -175,7 +175,7 @@ const Sidebar = ({ isOpen, onToggle }) => {
 							text="Converted"
 							showText={isOpen}
 							href="converted"
-							selected={(router.route || '').includes('converted')}
+							selected={(router.route || '') === '/converted'}
 						>
 							<AiOutlineReload fontSize={20} />
 						</SidebarLink>
@@ -183,7 +183,7 @@ const Sidebar = ({ isOpen, onToggle }) => {
 							text="Followup"
 							showText={isOpen}
 							href="followup"
-							selected={(router.route || '').includes('followup')}
+							selected={(router.route || '') === '/followup'}
 						>
 							<RiUserFollowLine fontSize={20} />
 						</SidebarLink>
@@ -191,7 +191,7 @@ const Sidebar = ({ isOpen, onToggle }) => {
 							text="Not Interested"
 							showText={isOpen}
 							href="not-interested"
-							selected={(router.route || '').includes('not-interested')}
+							selected={(router.route || '') === '/not-interested'}
 						>
 							<AiOutlineDislike fontSize={20} />
 						</SidebarLink>
