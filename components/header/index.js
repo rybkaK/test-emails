@@ -40,10 +40,14 @@ const AvatarError = styled.div`
 	margin-right: 50px;
 `;
 
-const Header = ({ imageSrc }) => {
+const Header = ({ imageSrc, inputValue, onInputChange }) => {
 	return (
 		<HeaderContainer>
-			<SearchInput placeholder="Search in mail" />
+			<SearchInput
+				placeholder="Search in mail"
+				value={inputValue}
+				onChange={onInputChange}
+			/>
 			{imageSrc ? (
 				<Avatar src={imageSrc} alt="avatar" />
 			) : (

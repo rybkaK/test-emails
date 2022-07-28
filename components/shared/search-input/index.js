@@ -38,7 +38,9 @@ const SearchInput = ({ placeholder, value, onChange }) => {
 			<StyledSearchInput
 				placeholder={placeholder}
 				value={value}
-				onChange={onChange}
+				onChange={(e) => {
+					onChange(e.target.value);
+				}}
 			/>
 			<FiSearch fontSize={20} color="#555555" />
 			{/* here we can add onSubmit handler or formik etc */}

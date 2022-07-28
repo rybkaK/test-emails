@@ -1,4 +1,5 @@
-import React, { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { AiOutlineReload } from 'react-icons/ai';
 import { TbMail, TbTrashX } from 'react-icons/tb';
 import {
@@ -11,6 +12,7 @@ import IconButton from '../../shared/icon-button';
 import Dropdown from '../../shared/dropdown';
 import Mail from '../mail';
 import { formatDate } from '../../../utils/formatDate';
+import { getSearchValue } from '../../../redux/slices/ui';
 
 const MainContainer = styled.main`
 	padding: 40px 75px 40px 35px;
@@ -51,6 +53,8 @@ const MainBody = styled.div`
 `;
 
 const Main = ({ mails }) => {
+	const searchValue = useSelector(getSearchValue);
+
 	const [isAllMailsSelected, setIsAllMailsSelected] = useState(false);
 
 	// eslint-disable-next-line no-unused-vars
@@ -59,6 +63,14 @@ const Main = ({ mails }) => {
 	const toggleAllMailsCheckbox = useCallback(() => {
 		setIsAllMailsSelected((prev) => !prev);
 	}, []);
+
+	const finalMails = useMemo(
+		() =>
+			mails.filter((mail) =>
+				(mail.name || '').toLowerCase().includes(searchValue.toLowerCase()),
+			),
+		[mails, searchValue],
+	);
 
 	return (
 		<MainContainer>
@@ -97,7 +109,7 @@ const Main = ({ mails }) => {
 				</PaginationContainer>
 			</MainHeader>
 			<MainBody>
-				{mails.map(({ id, name, description, date }) => (
+				{finalMails.map(({ id, name, description, date }) => (
 					<Mail
 						key={id}
 						title={name}
